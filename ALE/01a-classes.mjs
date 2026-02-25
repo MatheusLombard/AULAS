@@ -30,7 +30,8 @@ class FormaGeometrica{
         if(typeof valor !== Number || valor <= 0){
             throw new Error("Erro: a altura precisa ser numéria e maior que zero")
         }
-        this.#altura = valor
+        this.#altura = valo
+        
     }
 
 }
