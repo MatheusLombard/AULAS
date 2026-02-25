@@ -31,7 +31,24 @@ class FormaGeometrica{
             throw new Error("Erro: a altura precisa ser numéria e maior que zero")
         }
         this.#altura = valo
-        
+
     }
 
+    set tipo(valor){
+        if(!["R", "T", "E"].includes(valor.toUpperCase())){
+            throw new Error("Erro: o tipo precisa ser um dos valores 'R', 'T', 'E'")
+        }
+    }
+    calcArea(){
+        switch(this.#tipo){
+            case 'R':
+                return this.#base * this.#altura
+                break
+            case 'T':
+                return (this.#base * this.#altura) / 2
+                break
+            case 'E':
+                return (this.#base / 2) * (this.#altura / 2) * Math.PI  
+        }
+    }
 }
