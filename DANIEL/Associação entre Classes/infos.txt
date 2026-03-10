@@ -1,0 +1,33 @@
+Classes isoladas
+
+Associação entre Classes
+
+Associação TODO-PARTE
+
+ -> Agregação (fraca -> independência) --> se elimino o objeto-todo o objeto-parte não é eliminado
+ -> Composição (forte -> dependência) --> se elimino o objeto-todo o objeto-parte é eliminado
+
+Diagrama de classe UML
+
+Cliente
+-id:int
+-nome:String
+
+Pedido
+-id:int
+-data:Date
+
+ItemPedido
+-id:int
+-qtde:int
+
+Produto
+-id:int
+-nome:String
+-preco:float
+
+
+
+Acima 4 classes que se relacionam
+1 cliente pode fazer N pedidos
+1 pedido pode ter apenas 1 cliente
