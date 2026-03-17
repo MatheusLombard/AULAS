@@ -4,11 +4,17 @@ public class ArCondicionado{
     private boolean ligado;
 
 
-    public ArCondicionado(){}
+    public ArCondicionado(){
+        this.marca = "Generico!";
+        this.modelo = "Standart";
+        this.temperatura = 24;
+        this.ligado = false;
+    }
     public ArCondicionado(String marca, String modelo, int temperatura){
         setMarca(marca);
         setTemperatura(temperatura);
         this.modelo = modelo;
+        this.ligado = false;
     }
     public void setTemperatura(int t){
         if(t < 16 || t > 30){
@@ -17,6 +23,10 @@ public class ArCondicionado{
             this.temperatura = t;
             System.out.println("Temperatura alterada para " + this.temperatura + "°C");
         }
+    }
+
+    public boolean isLigado() {
+        return this.ligado;
     }
 
     public void setMarca(String marca) {

@@ -9,7 +9,7 @@ public class Disciplina {
 
     public Disciplina() {
         this.alunos = new ArrayList<>();
-        this.avaliacoes= new ArrayList<>();
+        this.avaliacoes = new ArrayList<>();
     }
 
     public Disciplina(int id, String nome, String professor) {
@@ -17,18 +17,32 @@ public class Disciplina {
         this.nome = nome;
         this.professor = professor;
         this.alunos = new ArrayList<>();
-        this.avaliacoes= new ArrayList<>();
+        this.avaliacoes = new ArrayList<>();
     }
 
-    public void matricularAluno(Aluno a){
+    public void matricularAluno(Aluno a) {
         this.alunos.add(a);
-    };
-    public Avaliacao criarAvaliacao(String id, String nome){
+    }
+
+    ;
+
+    public Avaliacao criarAvaliacao(String id, String nome) {
         Avaliacao aux = new Avaliacao(id, nome);
         this.avaliacoes.add(aux);
         return this.avaliacoes.getFirst();
-    };
+    }
 
+    ;
+
+
+    public Avaliacao getAvaliacao(String nome) {
+        for (Avaliacao av : avaliacoes) {
+            if (av.getNome().equals(nome)) {
+                return av;
+            }
+        }
+        return null;
+    }
 
     @Override
     public String toString() {
@@ -36,8 +50,10 @@ public class Disciplina {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", professor='" + professor + '\'' +
-                ", alunos=\n" + alunos +
-                ", \navaliacoes=\n" + avaliacoes +
+                ", alunos=" + alunos +
+                ", avaliacoes=" + avaliacoes +
                 '}';
     }
 }
+
+

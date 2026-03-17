@@ -19,6 +19,10 @@ public class Avaliacao {
         this.questoes.add(aux);
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     @Override
     public String toString() {
         return "Avaliacao{" +

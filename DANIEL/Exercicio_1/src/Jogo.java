@@ -11,9 +11,11 @@ public class Jogo {
     }
 
     public void registrarPontos(String time, int tipo){
-        if (time.equals("casa")){
+        if (time.equalsIgnoreCase("casa")){
             this.pontosCasa += tipo;
-        } else this.pontosVisitante += tipo;
+        } else if(time.equalsIgnoreCase("visitante")){
+            this.pontosVisitante += tipo;
+        }
     }
     public void proximaQuarto(){
         if (this.periodoQuarto != 4){

@@ -20,5 +20,8 @@ public class TestaAcademico {
 
 
         System.out.println(dp1.toString());
+
+        System.out.println("\nTESTE:");
+        System.out.println(dp1.getAvaliacao("Prova Semestral"));
     }
 }
