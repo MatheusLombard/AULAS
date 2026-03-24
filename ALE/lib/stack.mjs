@@ -20,6 +20,7 @@ export default class Stack {
 
     push(val){
         this.#data.push(val)
+        console.log(this.#data)
     }
 
     //METODO PARA REMOÇÃO DO VALOR
@@ -40,3 +41,7 @@ export default class Stack {
         return JSON.stringify(this.#data)
     }
 }
+
+const teste = new Stack()
+
+teste.push()
