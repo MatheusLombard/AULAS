@@ -1,0 +1,105 @@
+CREATE TABLE tb_empregados(
+    rg VARCHAR(15),
+    nm_empregado VARCHAR(40),
+    CONSTRAINT pk_tb_empregados_codigo PRIMARY KEY(rg)
+)
+
+CREATE TABLE tb_projetos(
+    codigo INTEGER,
+    ds_projeto VARCHAR(40),
+    CONSTRAINT pk_tb_projetos_codigo PRIMARY KEY(codigo)
+)
+
+CREATE TABLE tb_participacoes(
+    rg VARCHAR(15),
+    codigo INTEGER, 
+    dt_inicio DATE,
+    CONSTRAINT pk_tb_participacoes_rg PRIMARY KEY(rg, codigo),
+    CONSTRAINT fk_tb_participacoes_rg FOREIGN KEY(rg)
+        REFERENCES tb_empregados(rg),
+    CONSTRAINT fk_tb_participacoes_cod FOREIGN KEY(codigo)
+        REFERENCES tb_projetos(codigo)
+)
+DROP TABLE tb_empregados CASCADE;
+
+CREATE TABLE tb_empregados(
+    rg              VARCHAR(15),
+    nm_empregados   VARCHAR(60),
+    dt_nasciment   DATE,
+    rg_gerente      VARCHAR(15),
+    CONSTRAINT pk_tb_empregados_rg PRIMARY KEY(rg),
+    CONSTRAINT fk_tb_empregados_rg_gerente FOREIGN KEY(rg_gerente) 
+        REFERENCES tb_empregados(rg)
+)
+
+-- Elabore uma consulta para exibir o nome do empregado juntamente com o nome do seu gerente
+INSERT INTO tb_empregados(
+    rg, nome, dt_nascimento, rg_gerente
+) VALUES 
+('10', 'Matheus', '17/01/2000')
+('11', 'Filisbina', '17/01/2007', '10')
+('12', 'Filisbino', '17/01/2005', '11')
+
+SELECT e.nome || ' trabalha para ' || g.nome "Quem trabalha para quem?"
+FROM tb_empregados e
+INNER JOIN tb_empregados g 
+ON (e.rg = g.rg)
+
+CREATE TABLE tb_clientes(
+    rg_cliente        VARCHAR(15),
+    nm_cliente      VARCHAR(60),
+    dt_nascimento   DATE,
+    CONSTRAINT pk_tb_clientes_rg_cliente PRIMARY KEY(rg_cliente)
+)
+
+CREATE TABLE tb_bibliotecarias(
+    rg_bibliotecaria    VARCHAR(15),
+    nm_bibliotecaria    VARCHAR(60),
+    dt_nascimento       DATE,
+    CONSTRAINT pk_tb_bibliotecaria_rg_bibliotecaria PRIMARY KEY(rg_bibliotecaria)
+)
+
+CREATE TABLE tb_livros(
+    codigo              INTEGER,
+    ds_livro            INTEGER,
+    rg_cliente          VARCHAR(15),
+    dt_devolucao        DATE,
+    rg_bibliotecaria    VARCHAR(15),
+    CONSTRAINT pk_tb_livros_codigo PRIMARY KEY(codigo),
+    CONSTRAINT fk_tb_livros_rg_cliente FOREIGN KEY(rg_cliente)
+        REFERENCES tb_clientes(rg_cliente),
+    CONSTRAINT fk_tb_livros_rg_bibliotecaria FOREIGN KEY(rg_bibliotecaria) 
+        REFERENCES tb_bibliotecarias(rg_bibliotecaria)
+)
+
+CREATE TABLE tb_clientes(
+    rg  VARCHAR(15),
+    nm_cliente VARCHAR(60),
+    dt_nasc DATE,
+    CONSTRAINT pk_tb_clientes_rg PRIMARY KEY(rg)
+)
+
+CREATE TABLE tb_contas(
+    nr INTEGER,
+    ds_conta  VARCHAR(20),
+    dt_abertura DATE,
+    CONSTRAINT pk_tb_contas_nr PRIMARY KEY(nr)
+)
+
+CREATE TABLE tb_correntistas(
+    rg      VARCHAR(15),
+    nr_conta    INTEGER,
+    CONSTRAINT pk_tb_correntistas_rg_nr PRIMARY KEY (rg, nr_conta),
+    CONSTRAINT fk_tb_correntistas_rg FOREIGN KEY(rg) REFERENCES tb_clientes(rg),
+    CONSTRAINT fk_tb_correntistas_nr_conta FOREIGN KEY(nr_conta) REFERENCES tb_contas(nr)
+)
+
+CREATE TABLE tb_cartoes(
+    nr INTEGER,
+    dt_expedicao DATE,
+    rg   VARCHAR(15) CONSTRAINT nn_tb_cartoes_rg NOT NULL,
+    nr_conta INTEGER CONSTRAINT nn_tb_cartoes_nr_conta NOT NULL,
+    CONSTRAINT pk_tb_cartoes_nr PRIMARY KEY(nr),
+    CONSTRAINT fk_tb_cartoes_rg FOREIGN KEY(rg) REFERENCES tb_clientes(rg)
+    CONSTRAINT fk_tb_cartoes_nr_conta FOREIGN KEY(nr_conta) REFERENCES tb_contas(nr)
+)
