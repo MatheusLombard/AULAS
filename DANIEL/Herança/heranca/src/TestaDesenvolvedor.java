@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class TestaDesenvolvedor {
     public static void exibir(Desenvolvedor camaleao){
         camaleao.codar();
@@ -14,8 +16,20 @@ public class TestaDesenvolvedor {
         Pleno pl1 = new Pleno("Beltrano", "Java", 5000, 5);
         exibir(pl1);
         ////////////
-        Senior s1 = new Senior("Ciclano", "Java", 6000, 3000f);
-        exibir(s1);
+        Senior se1 = new Senior("Ciclano", "Java", 6000, 3000f);
+        exibir(se1);
 
+        // Cria vetor de desenvolvedor
+        ArrayList<Desenvolvedor> devs = new ArrayList<Desenvolvedor>();
+        //adiciona devs
+
+        devs.add(jr1);
+        devs.add(pl1);
+        devs.add(se1);
+
+        //percorra vetor para cada dev de devs
+        for(Desenvolvedor dev: devs){
+            exibir(dev); //chama exibir para cada DEV
+        }
     }
 }
