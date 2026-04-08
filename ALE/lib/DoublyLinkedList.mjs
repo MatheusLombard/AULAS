@@ -62,6 +62,76 @@ export class DoublyLinkedList{
             this.#tail.next = inserted;
             this.#tail = inserted;
         }
+
+        //4° caso : insersão na posição intermediaria
+        else{
+            let nodePos = this.#findNode(pos);
+            let before = nodePos.prev;
+            
+            before.next = inserted;
+
+            inserted.prev = before;
+            inserted.next = nodePos;
+
+            nodePos.prev = inserted;
+        }
+        this.#count++;
+    }
+    insertHead(val){
+        this.insert(0, val)
+    }
+    insertTail(val){
+        this.insert(this.count + 1, val)
+    }
+
+    //método para remover um nodo de qualquer posição
+    remove(pos, val){
+        
+        //1° Caso: lista vazia
+        if(this.isEmpty || pos >= this.#count) return;
+        
+        let removed;
+
+        //2° Caso: remoção do primeiro nodo
+        if(pos == 0){
+            removed = this.#head;
+            this.#head = removed.next;
+            if(this.#head){
+                this.#head.prev == null;
+            }
+            if(this.#count == 1) this.#tail == null;
+        }
+        //3° Caso: remoção do ultimo nodo
+        if(pos >= this.#count){
+            removed = this.#tail;
+            
+            this.#tail = removed.prev;
+            if(this.#tail)this.#tail.next = null;
+            if(this.#count === 1) this.#head = null;
+        }
+        //4° Caso: remoção em posição intermediaria;
+        else{
+            removed = this.#findNode(pos)
+            let before = removed.prev;
+            let after = removed.next;
+
+            before.next = after;
+            after.prev = before;
+        }
+
+        this.#count--
+        return removed.data;
+    }
+
+
+    removedHead(){
+        return this.remove(0)
+    }
+    removedTail(){
+        return this.remove(this.#count - 1)
+    }
+    peek(pos){
+        let seila = this.#findNode(pos)
     }
 }
 
